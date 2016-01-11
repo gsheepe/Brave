@@ -148,7 +148,7 @@ describe('urlbar', function () {
     })
 
     // We need a newer electron build first
-    it.skip('Parses theme-color meta tag when one is present', function *() {
+    it('Parses theme-color meta tag when one is present', function *() {
       const pageWithFavicon = Brave.server.url('theme_color.html')
       yield navigate(this.app.client, pageWithFavicon)
       yield this.app.client.waitUntil(() =>
@@ -156,13 +156,13 @@ describe('urlbar', function () {
           backgroundColor.parsed.hex === '#4d90fe'
       ))
     })
-    it.skip('Obtains theme color from favicon', function *() {
+    it('Obtains theme color from favicon', function *() {
       const pageWithFavicon = Brave.server.url('favicon.html')
       yield navigate(this.app.client, pageWithFavicon)
       yield this.app.client.waitUntil(() =>
         this.app.client.getCssProperty(activeTab, 'background-color').then(backgroundColor =>
-          backgroundColor.parsed.hex === '#320f07'
-      ))
+          backgroundColor.parsed.hex === '#8d4819'
+      ), 5000)
     })
   })
 

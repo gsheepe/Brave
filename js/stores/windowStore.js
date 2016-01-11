@@ -312,7 +312,9 @@ const doAction = (action) => {
       windowStore.emitChange()
       break
     case WindowConstants.WINDOW_SET_THEME_COLOR:
-      windowState = windowState.setIn(frameStatePathForFrame(action.frameProps).concat(['themeColor']), action.themeColor)
+      // Currently electron returns black for theme color when there is no theme color specified,
+      // so just take that as a signal to use the favion color instead.
+      windowState = windowState.setIn(frameStatePathForFrame(action.frameProps).concat(['themeColor']), action.themeColor !== '#000000' ? action.themeColor : undefined)
       windowStore.emitChange()
       break
     case WindowConstants.WINDOW_SET_URL_BAR_ACTIVE:
